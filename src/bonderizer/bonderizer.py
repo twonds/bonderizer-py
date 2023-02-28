@@ -1,16 +1,21 @@
+import os
+
 import fire
 
 
 class Bonderizer(object):
     """
-    Bonds run time code or framework with a simple
-    interface and consumer and producer. This needs work.
+    Given code that defines an interface with a consumer and producer
+    generate a composable service workload runtime.
     """
 
-    def new(self):
+    def new(self, name:str):
         """
-        Create a new project
+        Create a new project given a name
         """
+        # XXX - how do we document name
+        print(f"Created {name}")
+        
 
     def cli(self):
         """
