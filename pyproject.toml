@@ -20,3 +20,7 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/twonds/bonderizer-py"
 "Bug Tracker" = "https://github.com/twonds/bonerizer-py/issues"
+
+
+[project.scripts]
+bonderizer = "bonderizer.bonderizer:cli"
