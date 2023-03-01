@@ -16,6 +16,8 @@ classifiers = [
     "License :: OSI Approved :: Apache Software License",
     "Operating System :: OS Independent",
 ]
+dynamic = ["dependencies"]
+
 
 [project.urls]
 "Homepage" = "https://github.com/twonds/bonderizer-py"
@@ -24,3 +26,6 @@ classifiers = [
 
 [project.scripts]
 bonderizer = "bonderizer.bonderizer:cli"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
