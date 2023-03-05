@@ -21,7 +21,7 @@ from cookiecutter.main import cookiecutter
 import fire
 
 
-SCRIPT_DIR=os.path.dirname(__file__))
+SCRIPT_DIR=os.path.dirname(__file__)
 
 
 class Bonderizer(object):
@@ -38,7 +38,7 @@ class Bonderizer(object):
         # Create project from the cookiecutter-pypackage/ template
         os.mkdir(name)
         os.chdir(name)
-        cookiecutter(os.path.join(SCRIPT_DIR, 'templates/bonderizer'),
+        cookiecutter("gh:twonds/bonderizer-hello-py-cookiecutter",
                      extra_context={'project_name': name})
         print(f"Created {name}")
 
