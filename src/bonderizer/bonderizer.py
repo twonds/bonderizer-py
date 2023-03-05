@@ -15,7 +15,13 @@
 """
 import os
 
+from cookiecutter.main import cookiecutter
+
+
 import fire
+
+
+SCRIPT_DIR=os.path.dirname(__file__))
 
 
 class Bonderizer(object):
@@ -26,11 +32,16 @@ class Bonderizer(object):
 
     def new(self, name:str):
         """
-        Create a new project given a name
+        Create a new project given a name.
         """
-        # XXX - how do we document name
+        # XXX - Use other scaffolders other than cookiecutter. composability is key!
+        # Create project from the cookiecutter-pypackage/ template
+        os.mkdir(name)
+        os.chdir(name)
+        cookiecutter(os.path.join(SCRIPT_DIR, 'templates/bonderizer'),
+                     extra_context={'project_name': name})
         print(f"Created {name}")
-        
+
 
     def cli(self):
         """
