@@ -14,10 +14,7 @@
    limitations under the License.
 """
 import os
-import sys
-import subprocess
 
-from pathlib import Path
 
 from cookiecutter.main import cookiecutter
 
@@ -54,18 +51,7 @@ class Bonderizer(object):
         Generate CLI code for a project's runtime
         """
         print(project_interface)
-        # XXX - dependencies need to be installed, is this done here or somewhere else?
-        # pip install -U -r hello/requirements.txt
-        project_interface_path = Path(project_interface)
-        print(project_interface_path.parts)
-        call_args = [sys.executable, '-m', 'pip', 'install', '-U']
-        requirements_path = os.path.join(project_interface_path.parts[0], 'requirements.txt')
-        print(requirements_path)
-        if os.path.exists(requirements_path):
-            call_args += ['-r', requirements_path]
-        else:
-            call_args.append(project_interface_path.parts[0])
-        subprocess.check_call(call_args)
+        util.install_interface_dependencies(project_interface)
         # Read and import the interface
         interface = util.import_interface(project_interface)
         print(interface, dir(interface))
