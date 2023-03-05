@@ -21,6 +21,9 @@ from cookiecutter.main import cookiecutter
 import fire
 
 
+import .util
+
+
 SCRIPT_DIR=os.path.dirname(__file__)
 
 
@@ -35,6 +38,7 @@ class Bonderizer(object):
         Create a new project given a name.
         """
         # XXX - Use other scaffolders other than cookiecutter. composability is key!
+        # XXX - You can use build tools for creating new projects too
         # Create project from the cookiecutter-pypackage/ template
         cookiecutter("gh:twonds/bonderizer-hello-py-cookiecutter",
                      no_input=True, output_dir=output_dir,
@@ -42,23 +46,29 @@ class Bonderizer(object):
         print(f"Created {name}")
 
 
-    def cli(self):
+    def cli(self, project_dir: str = os.getcwd()):
         """
         Generate CLI code for a project's runtime
         """
+        print(project_dir)
+        # Read and import the interface
+        interface = util.import_interface(project_dir/src/interface.py)
+        print(interface, dir(interface))
+        # Find the producer class
 
 
-    def grpc(self):
+    def grpc(self, project_dir: str = os.getcwd()):
         """
         Generate gRPC code for a project's runtime
         """
+        # Find the producer class
 
-    def protobuf(self):
+    def protobuf(self, project_dir: str = os.getcwd()):
         """
         Generate a protobuf from a project's code
         """
 
-    def openapi(self):
+    def openapi(self, project_dir: str = os.getcwd()):
         """
         Generate openapi code and framework for a project's runtime
         """
