@@ -14,14 +14,17 @@
    limitations under the License.
 """
 import os
+import sys
+import subprocess
+
+from pathlib import Path
 
 from cookiecutter.main import cookiecutter
-
 
 import fire
 
 
-import .util
+import util
 
 
 SCRIPT_DIR=os.path.dirname(__file__)
@@ -46,13 +49,25 @@ class Bonderizer(object):
         print(f"Created {name}")
 
 
-    def cli(self, project_dir: str = os.getcwd()):
+    def cli(self, project_interface: str):
         """
         Generate CLI code for a project's runtime
         """
-        print(project_dir)
+        print(project_interface)
+        # XXX - dependencies need to be installed, is this done here or somewhere else?
+        # pip install -U -r hello/requirements.txt
+        project_interface_path = Path(project_interface)
+        print(project_interface_path.parts)
+        call_args = [sys.executable, '-m', 'pip', 'install', '-U']
+        requirements_path = os.path.join(project_interface_path.parts[0], 'requirements.txt')
+        print(requirements_path)
+        if os.path.exists(requirements_path):
+            call_args += ['-r', requirements_path]
+        else:
+            call_args.append(project_interface_path.parts[0])
+        subprocess.check_call(call_args)
         # Read and import the interface
-        interface = util.import_interface(project_dir/src/interface.py)
+        interface = util.import_interface(project_interface)
         print(interface, dir(interface))
         # Find the producer class
 

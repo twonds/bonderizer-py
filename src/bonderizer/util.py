@@ -2,7 +2,9 @@ import importlib.util
 import sys
 
 
-def import_interface(self, file_path):
+def import_interface(file_path):
+    # XXX - how do we get this right?
+    module_name = 'interface'
     print(file_path)
     spec = importlib.util.spec_from_file_location(module_name, file_path)
     module = importlib.util.module_from_spec(spec)
