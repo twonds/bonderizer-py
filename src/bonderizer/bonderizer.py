@@ -30,15 +30,16 @@ class Bonderizer(object):
     generate a composable service workload runtime.
     """
 
-    def new(self, name:str):
+    def new(self, name:str, output_dir:str = None):
         """
         Create a new project given a name.
         """
+        if output_dir is None:
+            output_dir = '.'
         # XXX - Use other scaffolders other than cookiecutter. composability is key!
         # Create project from the cookiecutter-pypackage/ template
-        os.mkdir(name)
-        os.chdir(name)
         cookiecutter("gh:twonds/bonderizer-hello-py-cookiecutter",
+                     no_input=True, output_dir=output_dir,
                      extra_context={'project_name': name})
         print(f"Created {name}")
 
